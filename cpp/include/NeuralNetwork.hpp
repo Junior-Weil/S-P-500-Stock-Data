@@ -11,7 +11,7 @@ class NeuralNetwork {
   public:
 
     // Constructor
-    NeuralNetwork(std::vector<unit> topology, Scalar learningRate = Scalar(0.005));
+    NeuralNetwork(std::vector<uint> topology, Scalar learningRate = Scalar(0.005));
 
     // Forward Propagation of data
     void propagateForward(RowVector& input);
@@ -44,5 +44,8 @@ class NeuralNetwork {
 
     std::vector<Matrix*> weights; // the connection of weights itself
 
+    std::vector<uint> topology;
+    
     Scalar learningRate;
-}
+
+};
