@@ -59,7 +59,8 @@ NeuralNetwork::NeuralNetwork(std::vector<uint> topology, Scalar learningRate) {
 
     for (uint i = 1; i < topology.size(); i++) {
       (*neuronLayers[i]) = (*neuronLayers[i-1]) * (*weights[i - 1]);
-      neuronLayers[i]->block(0, 0, 1, topology[i]).unaryExpr([](Scalar x) {return activationFunction(x);}); // could also just pass &activationFunction instead of lambda for function pointer
+      neuronLayers[i]->block(0, 0, 1, topology[i]).unaryExpr(&activationFunction);
+        //[](Scalar x) {return activationFunction(x);}); // could also just pass &activationFunction instead of lambda for function pointer
     }
   }
 
@@ -123,7 +124,7 @@ void ReadCSV(std::string filename, std::vector<RowVector*>& data) {
   getline(file, line, '\n');
   std::stringstream ss(line);
   std::vector<Scalar> parsed_vec;
-  while (getline(ss, word, ',')) { // might need to add trailing space for all ", " including genData in main.cpp
+  while (getline(ss, word, ',')) {
     parsed_vec.push_back(Scalar(std::stof(&word[0])));
   }
   uint cols = parsed_vec.size();
