@@ -1,6 +1,8 @@
 #include <eigen3/Eigen/Eigen>
 #include <iostream>
 #include <vector>
+#include <iostream>
+#include <fstream>
 
 typedef float Scalar;
 typedef Eigen::MatrixXf Matrix;
@@ -50,3 +52,5 @@ class NeuralNetwork {
     Scalar learningRate;
 
 };
+
+void ReadCSV(std::string filename, std::vector<RowVector*>& data);
