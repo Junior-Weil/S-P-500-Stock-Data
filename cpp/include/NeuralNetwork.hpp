@@ -26,7 +26,7 @@ class NeuralNetwork {
     void updateWeights();
 
     // Train NN give an array of data points
-    void train(std::vector<RowVector*> data);
+    void train(std::vector<RowVector*> input_data, std::vector<RowVector*> output_data);
 
     //storage objects for working of neural network
     /*
