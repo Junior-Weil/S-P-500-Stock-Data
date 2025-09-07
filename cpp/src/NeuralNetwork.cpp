@@ -41,18 +41,26 @@ NeuralNetwork::NeuralNetwork(std::vector<uint> topology, Scalar learningRate) {
         }
       }
     }
-};
+  };
 
-void NeuralNetwork::propagateForward(RowVector& input) {
-  // set the input to input layer
-  // block returns a part of the given vector or matrix
-  // block takes 4 args: startRow, startCol, blockRows, blockCols
-  neuronLayers.front()->block(0,0,1, neuronLayers.front()->size() - 1) = input;
 
-  for (uint i = 1; i < topology.size(); i++) {
-    (*neuronLayers[i]) = (*neuronLayers[i-1]) * (*weights[i - 1]);
-    neuronLayers[i]->block(0, 0, 1, topology[i]).unaryExpr(std::ptr_fun(activationFunction));
+  Scalar activationFunction(Scalar x) {
+      return tanhf(x);
   }
-}
 
+  Scalar activationFunctionDerivative(Scalar x) {
+      return 1 - tanhf(x) * tanhf(x);
+  }
+
+  void NeuralNetwork::propagateForward(RowVector& input) {
+    // set the input to input layer
+    // block returns a part of the given vector or matrix
+    // block takes 4 args: startRow, startCol, blockRows, blockCols
+    neuronLayers.front()->block(0,0,1, neuronLayers.front()->size() - 1) = input;
+
+    for (uint i = 1; i < topology.size(); i++) {
+      (*neuronLayers[i]) = (*neuronLayers[i-1]) * (*weights[i - 1]);
+      neuronLayers[i]->block(0, 0, 1, topology[i]).unaryExpr(std::ptr_fun(activationFunction));
+    }
+  }
 
