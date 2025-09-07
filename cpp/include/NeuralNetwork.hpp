@@ -17,7 +17,7 @@ class NeuralNetwork {
     void propagateForward(RowVector& input);
 
     // Backward Propagation of errors made by neurons
-    void proagateeBackward(RowVector& output);
+    void propagateBackward(RowVector& output);
 
     // Calculate errors made by neurons in each layer
     void calcErrors(RowVector& output);
@@ -45,7 +45,7 @@ class NeuralNetwork {
     std::vector<Matrix*> weights; // the connection of weights itself
 
     std::vector<uint> topology; // The topology vector describes how many neurons we have in each layer, and the size of this vector is equal to a number of layers in the neural network.
-    // 
+    //
 
     Scalar learningRate;
 
