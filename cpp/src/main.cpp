@@ -4,7 +4,7 @@ void genData(std::string filename) {
   std::ofstream file1(filename + "-in");
   std::ofstream file2(filename + "-out");
 
-  for (uint r = 0; r < 1000; r++) {
+  for (uint r = 0; r < 10; r++) {
     Scalar x = rand() / Scalar(RAND_MAX);
     Scalar y = rand() / Scalar(RAND_MAX);
     file1 << x << "," << y << std::endl;
